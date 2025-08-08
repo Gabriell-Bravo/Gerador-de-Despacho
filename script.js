@@ -5,6 +5,135 @@ const formData = {
     aditivos: []
 };
 
+const secretariasInfo = {
+    "Administração, Receita e Tributação": {
+        nome: "Hailson Alves Ramalho",
+        cargo: "Secretário Municipal de Administração, Receita e Tributação",
+        secretaria: "Secretaria Municipal de Administração, Receita e Tributação"
+    },
+    "Agricultura, Abastecimento e Pesca": {
+        nome: "Wellington Magalhães de Matos",
+        cargo: "Secretário Municipal de Agricultura, Abastecimento e Pesca",
+        secretaria: "Secretaria Municipal de Agricultura, Abastecimento e Pesca"
+    },
+    "Comunicação Social": {
+        nome: "Nilson da Costa Cardoso Júnior",
+        cargo: "Secretário Municipal de Comunicação Social",
+        secretaria: "Secretaria Municipal de Comunicação Social"
+    },
+    "Desenvolvimento Social": {
+        nome: "Joice Mattos Terra Bravo",
+        cargo: "Secretária Municipal de Desenvolvimento Social",
+        secretaria: "Secretaria Municipal de Desenvolvimento Social"
+    },
+    "Direitos dos Animais": {
+        nome: "Adriana Maria da Conceição Pereira",
+        cargo: "Secretária Municipal dos Direitos dos Animais",
+        secretaria: "Secretaria Municipal dos Direitos dos Animais"
+    },
+    "Educação, Cultura, Inclusão, Ciência e Tecnologia": {
+        nome: "Patricia da Silva Oliveira",
+        cargo: "Secretária Municipal de Educação, Cultura, Inclusão, Ciência e Tecnologia",
+        secretaria: "Secretaria Municipal de Educação, Cultura, Inclusão, Ciência e Tecnologia"
+    },
+    "Esporte, Lazer e Turismo": {
+        nome: "Rafael da Costa Castro",
+        cargo: "Secretário Municipal de Esporte, Lazer e Turismo",
+        secretaria: "Secretaria Municipal de Esporte, Lazer e Turismo"
+    },
+    "Finanças": {
+        nome: "Águido Henrique Almeida da Costa",
+        cargo: "Secretário Municipal de Finanças",
+        secretaria: "Secretaria Municipal de Finanças"
+    },
+    "Gabinete": {
+        nome: "Adriana Coelho Madalena",
+        cargo: "Secretária Municipal de Gabinete",
+        secretaria: "Secretaria Municipal de Gabinete"
+    },
+    "Gestão, Inovação e Tecnologia": {
+        nome: "Ruan Guimarães Barros",
+        cargo: "Secretário Municipal de Gestão, Inovação e Tecnologia (interino)",
+        secretaria: "Secretaria Municipal de Gestão, Inovação e Tecnologia"
+    },
+    "Governança e Sustentabilidade": {
+        nome: "Manoela Ramos de Souza Gomes Alves",
+        cargo: "Secretária Municipal de Governança e Sustentabilidade",
+        secretaria: "Secretaria Municipal de Governança e Sustentabilidade"
+    },
+    "Infraestrutura": {
+        nome: "Cledson Sampaio Bitencourt",
+        cargo: "Secretário Municipal de Infraestrutura",
+        secretaria: "Secretaria Municipal de Infraestrutura"
+    },
+    "Meio Ambiente": {
+        nome: "Gilmar Rocha de Magalhães",
+        cargo: "Secretário Municipal de Meio Ambiente",
+        secretaria: "Secretaria Municipal de Meio Ambiente"
+    },
+    "Mulher": {
+        nome: "Marcia de Almeida Silva Azeredo",
+        cargo: "Secretária Municipal da Mulher",
+        secretaria: "Secretaria Municipal da Mulher"
+    },
+    "Transporte e Serviços Públicos": {
+        nome: "Lindonor Ferreira Rezende da Rosa",
+        cargo: "Secretário Municipal de Transporte e Serviços Públicos",
+        secretaria: "Secretaria Municipal de Transporte e Serviços Públicos"
+    },
+    "Obras Públicas": {
+        nome: "Priscilla Barroso Poubel",
+        cargo: "Secretária Municipal de Obras Públicas",
+        secretaria: "Secretaria Municipal de Obras Públicas"
+    },
+    "Planejamento": {
+        nome: "Celio Ricardo de Almeida Pereira",
+        cargo: "Secretário Municipal de Planejamento",
+        secretaria: "Secretaria Municipal de Planejamento"
+    },
+    "Relações Institucionais": {
+        nome: "Antonio Peres Alves",
+        cargo: "Secretário Municipal de Relações Institucionais",
+        secretaria: "Secretaria Municipal de Relações Institucionais"
+    },
+    "Saúde": {
+        nome: "João Alberto Teixeira Oliveira",
+        cargo: "Secretário Municipal de Saúde",
+        secretaria: "Secretaria Municipal de Saúde"
+    },
+    "Segurança e Ordem Pública": {
+        nome: "Evanildo Andrade dos Santos",
+        cargo: "Secretário Municipal de Segurança e Ordem Pública",
+        secretaria: "Secretaria Municipal de Segurança e Ordem Pública"
+    },
+    "Transparência e Integridade": {
+        nome: "Daniele Ramos Marques da Cruz",
+        cargo: "Secretária Municipal de Transparência e Integridade",
+        secretaria: "Secretaria Municipal de Transparência e Integridade"
+    },
+    "Urbanismo": {
+        nome: "Felipe de Oliveira Araujo",
+        cargo: "Secretário Municipal de Urbanismo",
+        secretaria: "Secretaria Municipal de Urbanismo"
+    },
+    "IPRES": {
+        nome: "Nilmar Epaminondas da Silva",
+        cargo: "Presidente do Instituto de Previdência dos Servidores Municipais de Saquarema – IPRES",
+        secretaria: "Instituto de Previdência dos Servidores Municipais de Saquarema – IPRES"
+    },
+    "Controladoria Geral": {
+        nome: "Carlos Adriano Klafke dos Santos",
+        cargo: "Controlador Geral do Município",
+        secretaria: "Controladoria Geral do Município"
+    },
+    "Procuradoria Geral": {
+        nome: "Claudius Valerius Malheiros Barcell",
+        cargo: "Procurador Geral do Município",
+        secretaria: "Procuradoria Geral do Município"
+    },
+    // Adicione mais secretarias conforme necessário
+};
+
 function navigate(direction) {
     const nextStep = currentStep + direction;
     if (nextStep > 0 && nextStep <= totalSteps) {
@@ -307,147 +436,180 @@ function toggleEspecificar(groupId, isChecked) {
 function generatePreview() {
     const previewContainer = document.getElementById('preview-container');
 
+    // Busca os dados do responsável pela secretaria selecionada
+    const secretariaSelecionada = formData.secretaria_orgao;
+    const info = secretariasInfo[secretariaSelecionada] || {
+        nome: "[Nome Completo do Ordenador de Despesas]",
+        cargo: "[Cargo do Ordenador de Despesas]",
+        secretaria: secretariaSelecionada || "[Secretaria/Órgão Gerenciador]"
+    };
+
+    // Tabela de apostilamentos em HTML
     const apostilamentosTable = formData.apostilamentos.length > 0 ? `
-| Nº do Apostilamento | Data do Documento | Índice Aplicado | Valor Reajustado |
-|:--------------------|:------------------|:----------------|:-----------------|
-${formData.apostilamentos.map((a, i) => `| ${i + 1}                   | ${formatDate(a.data)}      | ${a.indice || 'N/D'}             | ${formatCurrency(a.valor)}    |`).join('\n')}
-` : 'Nenhum apostilamento registrado.';
+        <table style="width:100%;border-collapse:collapse;margin-bottom:16px;">
+            <thead>
+                <tr>
+                    <th style="border:1px solid #ccc;padding:4px;">Nº</th>
+                    <th style="border:1px solid #ccc;padding:4px;">Data do Documento</th>
+                    <th style="border:1px solid #ccc;padding:4px;">Índice Aplicado</th>
+                    <th style="border:1px solid #ccc;padding:4px;">Valor Reajustado</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${formData.apostilamentos.map((a, i) => `
+                    <tr>
+                        <td style="border:1px solid #ccc;padding:4px;">${i + 1}</td>
+                        <td style="border:1px solid #ccc;padding:4px;">${formatDate(a.data)}</td>
+                        <td style="border:1px solid #ccc;padding:4px;">${a.indice || 'N/D'}</td>
+                        <td style="border:1px solid #ccc;padding:4px;">${formatCurrency(a.valor)}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    ` : '<em>Nenhum apostilamento registrado.</em>';
 
+    // Tabela de aditivos em HTML
     const aditivosTable = formData.aditivos.length > 0 ? `
-| Nº do Aditivo | Tipo                        | Início da Vigência | Término da Vigência |
-|:--------------|:----------------------------|:-------------------|:--------------------|
-${formData.aditivos.map((a, i) => `| ${i + 1}            | ${a.tipo} | ${formatDate(a.inicio)}       | ${formatDate(a.fim)}         |`).join('\n')}
-` : 'Nenhum aditivo anterior registrado.';
+        <table style="width:100%;border-collapse:collapse;margin-bottom:16px;">
+            <thead>
+                <tr>
+                    <th style="border:1px solid #ccc;padding:4px;">Nº</th>
+                    <th style="border:1px solid #ccc;padding:4px;">Tipo</th>
+                    <th style="border:1px solid #ccc;padding:4px;">Início da Vigência</th>
+                    <th style="border:1px solid #ccc;padding:4px;">Término da Vigência</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${formData.aditivos.map((a, i) => `
+                    <tr>
+                        <td style="border:1px solid #ccc;padding:4px;">${i + 1}</td>
+                        <td style="border:1px solid #ccc;padding:4px;">${a.tipo}</td>
+                        <td style="border:1px solid #ccc;padding:4px;">${formatDate(a.inicio)}</td>
+                        <td style="border:1px solid #ccc;padding:4px;">${formatDate(a.fim)}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    ` : '<em>Nenhum aditivo anterior registrado.</em>';
 
+    // Lista de anexos em HTML
     const anexosList = `
-* (${formData.anexo_parecer ? 'X' : ' '}) Parecer Jurídico Favorável (Fl(s). ${formData.anexo_parecer_folhas || 'N/I'})
-* (${formData.anexo_analise ? 'X' : ' '}) Análise Técnica da Área Demandante (Fl(s). ${formData.anexo_analise_folhas || 'N/I'})
-* (${formData.anexo_precos ? 'X' : ' '}) Demonstração de Preços e Vantajosidade Econômica (Fl(s). ${formData.anexo_precos_folhas || 'N/I'})
-* (${formData.anexo_capacidade ? 'X' : ' '}) Comprovação da Capacidade Técnica e Financeira da Contratada (Fl(s). ${formData.anexo_capacidade_folhas || 'N/I'})`;
+        <ul>
+            <li>(${formData.anexo_parecer ? 'X' : ' '}) Parecer Jurídico Favorável (Fl(s). ${formData.anexo_parecer_folhas || 'N/I'})</li>
+            <li>(${formData.anexo_analise ? 'X' : ' '}) Análise Técnica da Área Demandante (Fl(s). ${formData.anexo_analise_folhas || 'N/I'})</li>
+            <li>(${formData.anexo_precos ? 'X' : ' '}) Demonstração de Preços e Vantajosidade Econômica (Fl(s). ${formData.anexo_precos_folhas || 'N/I'})</li>
+            <li>(${formData.anexo_capacidade ? 'X' : ' '}) Comprovação da Capacidade Técnica e Financeira da Contratada (Fl(s). ${formData.anexo_capacidade_folhas || 'N/I'})</li>
+        </ul>
+    `;
 
     const brasaoImage = `<img src="https://www.saquarema.rj.gov.br/wp-content/uploads/2018/03/brasao-saquarema-768x860.png" alt="Brasão da Prefeitura Municipal de Saquarema" class="mx-auto mb-4 h-20 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/80x80/E0E7FF/000000?text=Brasão';">`;
 
-    let tipoAditivoDisplay = formData.aditivo_tipos.join(' e ') || '[Tipo não informado]';
+    let tipoAditivoDisplay = formData.aditivo_tipos && formData.aditivo_tipos.length > 0
+        ? formData.aditivo_tipos.join(' e ')
+        : '[Tipo não informado]';
 
     let renovacaoDetalhes = '';
     if (formData.alteracao_quantitativa && formData.alteracao_quantitativa_especificar) {
-        renovacaoDetalhes += `   - Alteração Quantitativa: ${formData.alteracao_quantitativa_especificar}\n`;
+        renovacaoDetalhes += `<li>Alteração Quantitativa: ${formData.alteracao_quantitativa_especificar}</li>`;
     } else if (formData.alteracao_quantitativa) {
-        renovacaoDetalhes += `   - Alteração Quantitativa: [Não especificado]\n`;
+        renovacaoDetalhes += `<li>Alteração Quantitativa: [Não especificado]</li>`;
     }
-
     if (formData.alteracao_qualitativa && formData.alteracao_qualitativa_especificar) {
-        renovacaoDetalhes += `   - Alteração Qualitativa: ${formData.alteracao_qualitativa_especificar}\n`;
+        renovacaoDetalhes += `<li>Alteração Qualitativa: ${formData.alteracao_qualitativa_especificar}</li>`;
     } else if (formData.alteracao_qualitativa) {
-        renovacaoDetalhes += `   - Alteração Qualitativa: [Não especificado]\n`;
+        renovacaoDetalhes += `<li>Alteração Qualitativa: [Não especificado]</li>`;
     }
-
     if (formData.alteracoes_outras_condicoes && formData.alteracoes_outras_condicoes_especificar) {
-        renovacaoDetalhes += `   - Alterações em Outras Condições de Execução: ${formData.alteracoes_outras_condicoes_especificar}\n`;
+        renovacaoDetalhes += `<li>Alterações em Outras Condições de Execução: ${formData.alteracoes_outras_condicoes_especificar}</li>`;
     } else if (formData.alteracoes_outras_condicoes) {
-        renovacaoDetalhes += `   - Alterações em Outras Condições de Execução: [Não especificado]\n`;
+        renovacaoDetalhes += `<li>Alterações em Outras Condições de Execução: [Não especificado]</li>`;
     }
-
     if (renovacaoDetalhes) {
-        renovacaoDetalhes = `\n   Detalhes da Renovação:\n${renovacaoDetalhes}`;
+        renovacaoDetalhes = `<ul>${renovacaoDetalhes}</ul>`;
     }
 
     let alteracaoContratualDetalhes = '';
     if (formData.alteracao_contratual_quantitativa && formData.alteracao_contratual_quantitativa_especificar) {
-        alteracaoContratualDetalhes += `   - Alteração Quantitativa: ${formData.alteracao_contratual_quantitativa_especificar}\n`;
+        alteracaoContratualDetalhes += `<li>Alteração Quantitativa: ${formData.alteracao_contratual_quantitativa_especificar}</li>`;
     } else if (formData.alteracao_contratual_quantitativa) {
-        alteracaoContratualDetalhes += `   - Alteração Quantitativa: [Não especificado]\n`;
+        alteracaoContratualDetalhes += `<li>Alteração Quantitativa: [Não especificado]</li>`;
     }
-
     if (formData.alteracao_contratual_qualitativa && formData.alteracao_contratual_qualitativa_especificar) {
-        alteracaoContratualDetalhes += `   - Alteração Qualitativa: ${formData.alteracao_contratual_qualitativa_especificar}\n`;
+        alteracaoContratualDetalhes += `<li>Alteração Qualitativa: ${formData.alteracao_contratual_qualitativa_especificar}</li>`;
     } else if (formData.alteracao_contratual_qualitativa) {
-        alteracaoContratualDetalhes += `   - Alteração Qualitativa: [Não especificado]\n`;
+        alteracaoContratualDetalhes += `<li>Alteração Qualitativa: [Não especificado]</li>`;
     }
-
     if (formData.alteracoes_contratuais_outras_condicoes && formData.alteracoes_contratuais_outras_condicoes_especificar) {
-        alteracaoContratualDetalhes += `   - Alterações em Outras Condições de Execução: ${formData.alteracoes_contratuais_outras_condicoes_especificar}\n`;
+        alteracaoContratualDetalhes += `<li>Alterações em Outras Condições de Execução: ${formData.alteracoes_contratuais_outras_condicoes_especificar}</li>`;
     } else if (formData.alteracoes_contratuais_outras_condicoes) {
-        alteracaoContratualDetalhes += `   - Alterações em Outras Condições de Execução: [Não especificado]\n`;
+        alteracaoContratualDetalhes += `<li>Alterações em Outras Condições de Execução: [Não especificado]</li>`;
     }
-
     if (alteracaoContratualDetalhes) {
-        alteracaoContratualDetalhes = `\n   Detalhes do Aditivo de Alteração Contratual:\n${alteracaoContratualDetalhes}`;
+        alteracaoContratualDetalhes = `<ul>${alteracaoContratualDetalhes}</ul>`;
     }
-
 
     const previewText = `
-${brasaoImage}
-Prefeitura Municipal de Saquarema
-${formData.secretaria_orgao || '[Secretaria/Órgão Gerenciador]'}
-
----
-
-DESPACHO DO ORDENADOR DE DESPESAS
-(Modelo CGM 001/2025 - Despacho de Termo Aditivo)
---------------------------------------------------
-PROCESSO Nº: ${formData.processo_n || '[Não informado]'}
-ASSUNTO: Solicitação de Análise para Termo Aditivo de ${tipoAditivoDisplay}
-
-I. DADOS DO CONTRATO ORIGINAL
-   - Número do Contrato: ${formData.contrato_n || '[Não informado]'}
-   - Objeto: ${formData.contrato_objeto || '[Não informado]'}
-   - Data de Assinatura do Contrato: ${formatDate(formData.contrato_assinatura)}
-   - Vigência Inicial: ${formatDate(formData.contrato_vigencia_inicio)} a ${formatDate(formData.contrato_vigencia_fim)}
-   - Valor Original: ${formatCurrency(formData.contrato_valor)}
-   - Empresa Contratada: ${formData.empresa_nome || '[Não informado]'} (CNPJ: ${formData.empresa_cnpj || '[Não informado]'})
-   - Instrumento Contratual (Fls.): ${formData.contrato_folhas || '[Não informado]'}
-
-II. HISTÓRICO DA GESTÃO CONTRATUAL
-   A. APOSTILAMENTOS DE REAJUSTAMENTOS
-      ${apostilamentosTable}
-     
-   B. ADITIVOS ANTERIORES (PRORROGAÇÃO/RENOVAÇÃO/ALTERAÇÃO CONTRATUAL)
-      ${aditivosTable}
-     
-   C. RESUMO DE OCORRÊNCIAS / INCIDÊNCIAS RELEVANTES
-      ${formData.ocorrencias_resumo || 'Nenhuma ocorrência relevante registrada.'}
-
-III. INFORMAÇÕES SOBRE O TERMO ADITIVO PROPOSTO
-   - Tipo de Aditivo Proposto: ${tipoAditivoDisplay}
-   - Período Proposto: ${formatDate(formData.proposta_vigencia_inicio)} a ${formatDate(formData.proposta_vigencia_fim)}
-   - Nova Data de Término da Vigência: ${formatDate(formData.proposta_vigencia_fim)}
-   - Valor Estimado do Aditivo: ${formData.proposta_valor ? formatCurrency(formData.proposta_valor) : 'Não se aplica'}
-   - Base Legal: ${formData.proposta_base_legal || '[Não informada]'}
-   - Justificativa: ${formData.proposta_justificativa || '[Não informada]'}
-   - Alinhamento ao PPA e LOA: ${formData.ppa_loa_alinhamento || '[Não informado]'}
-   - Reserva Orçamentária Nº: ${formData.reserva_orcamentaria_n || '[Não informada]'} (Fls. ${formData.reserva_orcamentaria_folhas || 'N/I'})
-   - Empenho da Despesa Nº: ${formData.empenho_despesa_n || '[Não informado]'} (Fls. ${formData.empenho_despesa_folhas || 'N/I'})
-   - Data do Empenho: ${formatDate(formData.empenho_data)}
-   - Início Contagem Prazo Reajustamento: ${formatDate(formData.reajuste_inicio_contagem)}
-   - Data de Conclusão do Período Aquisitivo para o Próximo Reajustamento: ${formatDate(formData.data_conclusao_periodo_aquisitivo)}
-   - Cláusula Contratual de Reajustamento: ${formData.clausula_reajuste || '[Não informada]'}
-   - Cláusula Contratual de Prorrogação de Vigência: ${formData.clausula_prorrogacao || '[Não informada]'}
-${renovacaoDetalhes}
-${alteracaoContratualDetalhes}
-
-V. ANEXOS
-${anexosList}
-
-VI. SOLICITAÇÃO AO CONTROLE INTERNO
-Com os dados e documentos acima, encaminho o presente processo para análise e manifestação do Controle Interno, a fim de subsidiar a decisão quanto à celebração do Termo Aditivo de ${tipoAditivoDisplay}, de acordo com a legislação vigente e as normas internas desta Instituição.
-
-Atenciosamente,
-
-Saquarema, ${formatDate(formData.despacho_data_assinatura || new Date().toISOString().split('T')[0])}
-
----
-
-[Assinatura do Ordenador de Despesas]
-[Nome Completo do Ordenador de Despesas]
-[Cargo do Ordenador de Despesas]
-[Matrícula/Identificação]
-${formData.secretaria_orgao || '[Secretaria/Órgão Gerenciador]'}
-            `;
+        ${brasaoImage}
+        <div style="text-align:center;font-weight:bold;">Prefeitura Municipal de Saquarema</div>
+        <div style="text-align:center;">${info.secretaria}</div>
+        <hr>
+        <h2 style="text-align:center;">DESPACHO DO ORDENADOR DE DESPESAS</h2>
+        <div><strong>PROCESSO Nº:</strong> ${formData.processo_n || '[Não informado]'}</div>
+        <div><strong>ASSUNTO:</strong> Solicitação de Análise para Termo Aditivo de ${tipoAditivoDisplay}</div>
+        <h3>I. DADOS DO CONTRATO ORIGINAL</h3>
+        <ul>
+            <li>Número do Contrato: ${formData.contrato_n || '[Não informado]'}</li>
+            <li>Objeto: ${formData.contrato_objeto || '[Não informado]'}</li>
+            <li>Data de Assinatura do Contrato: ${formatDate(formData.contrato_assinatura)}</li>
+            <li>Vigência Inicial: ${formatDate(formData.contrato_vigencia_inicio)} a ${formatDate(formData.contrato_vigencia_fim)}</li>
+            <li>Valor Original: ${formatCurrency(formData.contrato_valor)}</li>
+            <li>Empresa Contratada: ${formData.empresa_nome || '[Não informado]'} (CNPJ: ${formData.empresa_cnpj || '[Não informado]'})</li>
+            <li>Instrumento Contratual (Fls.): ${formData.contrato_folhas || '[Não informado]'}</li>
+        </ul>
+        <h3>II. HISTÓRICO DA GESTÃO CONTRATUAL</h3>
+        <strong>A. Apostilamentos de Reajustamentos</strong>
+        ${apostilamentosTable}
+        <strong>B. Aditivos Anteriores (Prorrogação/Renovação/Alteração Contratual)</strong>
+        ${aditivosTable}
+        <strong>C. Resumo de Ocorrências / Incidências Relevantes</strong>
+        <div>${formData.ocorrencias_resumo || 'Nenhuma ocorrência relevante registrada.'}</div>
+        <h3>III. INFORMAÇÕES SOBRE O TERMO ADITIVO PROPOSTO</h3>
+        <ul>
+            <li>Tipo de Aditivo Proposto: ${tipoAditivoDisplay}</li>
+            <li>Período Proposto: ${formatDate(formData.proposta_vigencia_inicio)} a ${formatDate(formData.proposta_vigencia_fim)}</li>
+            <li>Nova Data de Término da Vigência: ${formatDate(formData.proposta_vigencia_fim)}</li>
+            <li>Valor Estimado do Aditivo: ${formData.proposta_valor ? formatCurrency(formData.proposta_valor) : 'Não se aplica'}</li>
+            <li>Base Legal: ${formData.proposta_base_legal || '[Não informada]'}</li>
+            <li>Justificativa: ${formData.proposta_justificativa || '[Não informada]'}</li>
+            <li>Alinhamento ao PPA e LOA: ${formData.ppa_loa_alinhamento || '[Não informado]'}</li>
+            <li>Reserva Orçamentária Nº: ${formData.reserva_orcamentaria_n || '[Não informada]'} (Fls. ${formData.reserva_orcamentaria_folhas || 'N/I'})</li>
+            <li>Empenho da Despesa Nº: ${formData.empenho_despesa_n || '[Não informado]'} (Fls. ${formData.empenho_despesa_folhas || 'N/I'})</li>
+            <li>Data do Empenho: ${formatDate(formData.empenho_data)}</li>
+            <li>Início Contagem Prazo Reajustamento: ${formatDate(formData.reajuste_inicio_contagem)}</li>
+            <li>Data de Conclusão do Período Aquisitivo para o Próximo Reajustamento: ${formatDate(formData.data_conclusao_periodo_aquisitivo)}</li>
+            <li>Cláusula Contratual de Reajustamento: ${formData.clausula_reajuste || '[Não informada]'}</li>
+            <li>Cláusula Contratual de Prorrogação de Vigência: ${formData.clausula_prorrogacao || '[Não informada]'}</li>
+        </ul>
+        ${renovacaoDetalhes ? `<div><strong>Detalhes da Renovação:</strong>${renovacaoDetalhes}</div>` : ''}
+        ${alteracaoContratualDetalhes ? `<div><strong>Detalhes do Aditivo de Alteração Contratual:</strong>${alteracaoContratualDetalhes}</div>` : ''}
+        <h3>V. ANEXOS</h3>
+        ${anexosList}
+        <h3>VI. SOLICITAÇÃO AO CONTROLE INTERNO</h3>
+        <p>Com os dados e documentos acima, encaminho o presente processo para análise e manifestação do Controle Interno, a fim de subsidiar a decisão quanto à celebração do Termo Aditivo de ${tipoAditivoDisplay}, de acordo com a legislação vigente e as normas internas desta Instituição.</p>
+        <p>Atenciosamente,</p>
+        <p>Saquarema, ${formatDate(formData.despacho_data_assinatura || new Date().toISOString().split('T')[0])}</p>
+        <hr>
+        <div>
+            <strong>Assinatura do Ordenador de Despesas</strong><br>
+            ${info.nome}<br>
+            ${info.cargo}<br>
+            [Matrícula/Identificação]<br>
+            ${info.secretaria}
+        </div>
+    `;
 
     previewContainer.innerHTML = previewText;
 }
-
 document.addEventListener('DOMContentLoaded', () => {
     updateNavButtons();
     renderApostilamentos();
