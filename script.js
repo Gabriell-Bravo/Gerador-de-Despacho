@@ -603,7 +603,6 @@ function generatePreview() {
             <strong>Assinatura do Ordenador de Despesas</strong><br>
             ${info.nome}<br>
             ${info.cargo}<br>
-            [Matrícula/Identificação]<br>
             ${info.secretaria}
         </div>
     `;
@@ -622,4 +621,5 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleEspecificar('alteracao_contratual_quantitativa_especificar_group', document.getElementById('alteracao_contratual_quantitativa').checked);
     toggleEspecificar('alteracao_contratual_qualitativa_especificar_group', document.getElementById('alteracao_contratual_qualitativa').checked);
     toggleEspecificar('alteracoes_contratuais_outras_condicoes_especificar_group', document.getElementById('alteracoes_contratuais_outras_condicoes').checked);
-});        
+}
+);        

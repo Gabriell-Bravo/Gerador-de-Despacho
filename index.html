@@ -72,7 +72,21 @@
 
 <body class="bg-slate-50 text-slate-800">
 
-    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+    <!-- Tela de Login -->
+    <div id="login-container" class="fixed inset-0 flex items-center justify-center bg-slate-900 bg-opacity-70 z-50">
+        <form id="login-form" class="bg-white p-8 rounded-xl shadow-lg w-80 flex flex-col gap-4">
+            <h2 class="text-xl font-bold text-center text-amber-600 mb-2">Login</h2>
+            <input type="text" id="login-usuario" class="p-2 border border-slate-300 rounded-md" placeholder="Usuário"
+                required>
+            <input type="password" id="login-senha" class="p-2 border border-slate-300 rounded-md" placeholder="Senha"
+                required>
+            <button type="submit"
+                class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 rounded-lg">Entrar</button>
+            <p id="login-erro" class="text-red-600 text-sm text-center hidden">Usuário ou senha incorretos.</p>
+        </form>
+    </div>
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl" style="display:none;" id="main-app-container">
 
         <header class="text-center mb-8">
             <h1 class="text-3xl font-bold text-slate-700">Gerador de Despacho Contratual</h1>
@@ -590,6 +604,30 @@
         </main>
     </div>
     <script src="script.js"></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const loginForm = document.getElementById('login-form');
+            const loginContainer = document.getElementById('login-container');
+            const mainApp = document.getElementById('main-app-container');
+            const erroMsg = document.getElementById('login-erro');
+            loginForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const usuario = document.getElementById('login-usuario').value;
+                const senha = document.getElementById('login-senha').value;
+                if (usuario === 'admin' && senha === 'admin') {
+                    loginContainer.style.display = 'none';
+                    mainApp.style.display = '';
+                } else {
+                    erroMsg.classList.remove('hidden');
+                }
+            });
+
+            loginForm.addEventListener('input', function () {
+                erroMsg.classList.add('hidden');
+            });
+        });
+    </script>
 </body>
 
 </html>
