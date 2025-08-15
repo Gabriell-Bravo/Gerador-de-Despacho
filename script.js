@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         const usuario = document.getElementById('login-usuario').value;
         const senha = document.getElementById('login-senha').value;
+        console.log('Usuário:', usuario, 'Senha:', senha);
 
         // Alteração: use supabaseClient nas consultas
         const { data, error } = await supabaseClient
@@ -28,6 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
             .eq('usuario', usuario)
             .eq('senha', senha) // Para produção, use hash de senha!
             .single();
+
+        console.log('data:', data, 'error:', error);
 
         if (data) {
             // Salve a secretaria do usuário logado
