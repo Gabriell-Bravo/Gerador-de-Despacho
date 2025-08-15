@@ -5,6 +5,44 @@ const formData = {
     aditivos: []
 };
 
+const SUPABASE_URL = 'https://tkttoczozozdpxtgqqgf.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRrdHRvY3pvem96ZHB4dGdxcWdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyNzg2NzYsImV4cCI6MjA3MDg1NDY3Nn0.8F4b0yuynIatHp32F-LeMNT539yHehcV-h_zZ8iaWGw';
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.getElementById('login-form');
+    const loginContainer = document.getElementById('login-container');
+    const mainApp = document.getElementById('main-app-container');
+    const erroMsg = document.getElementById('login-erro');
+
+    loginForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const usuario = document.getElementById('login-usuario').value;
+        const senha = document.getElementById('login-senha').value;
+
+        // Consulta o Supabase
+        const { data, error } = await supabase
+            .from('usuarios')
+            .select('*')
+            .eq('usuario', usuario)
+            .eq('senha', senha) // Para produção, use hash de senha!
+            .single();
+
+        if (data) {
+            // Salve a secretaria do usuário logado
+            formData.secretaria_orgao = data.secretaria;
+            loginContainer.style.display = 'none';
+            mainApp.style.display = '';
+        } else {
+            erroMsg.classList.remove('hidden');
+        }
+    });
+
+    loginForm.addEventListener('input', function () {
+        erroMsg.classList.add('hidden');
+    });
+});
+
 const secretariasInfo = {
     "Administração, Receita e Tributação": {
         nome: "Hailson Alves Ramalho",
