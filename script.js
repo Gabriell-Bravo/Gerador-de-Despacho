@@ -36,17 +36,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 .from('Usuarios')
                 .select('*')
                 .eq('usuario', usuario)
-                .eq('senha', senha)
-                .single();
+                .eq('senha', senha);
 
             console.log('Resposta Supabase:', { data, error });
             console.log('Status:', error ? error.message : 'Sucesso');
 
-            if (data) {
-                console.log('Usuário encontrado:', data);
-                formData.secretaria_orgao = data.secretaria;
+            if (data && data.length > 0) {
+                const userData = data[0]; // Pega o primeiro usuário
+                formData.secretaria_orgao = userData.secretaria;
                 loginContainer.style.display = 'none';
                 mainApp.style.display = '';
+                console.log('Login bem-sucedido:', userData);
+
             } else {
                 console.log('Nenhum usuário encontrado ou erro:', error);
                 erroMsg.classList.remove('hidden');
