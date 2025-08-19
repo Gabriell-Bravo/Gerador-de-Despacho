@@ -1,87 +1,9 @@
-// Verifique se supabase está carregado
-if (typeof supabase === 'undefined') {
-    console.error('Supabase não carregado!');
-    // Recarregue a página ou mostre mensagem de erro
-}
-
 let currentStep = 1;
 const totalSteps = 4;
 const formData = {
     apostilamentos: [],
     aditivos: []
 };
-
-const SUPABASE_URL = 'https://tkttoczozozdpxtgqqgf.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRrdHRvY3pvem96ZHB4dGdxcWdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyNzg2NzYsImV4cCI6MjA3MDg1NDY3Nn0.8F4b0yuynIatHp32F-LeMNT539yHehcV-h_zZ8iaWGw';
-// Alteração: use outro nome para o cliente Supabase para evitar conflito
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-const { data, error } = await supabaseClient
-    .rpc('fazer_login', {
-        p_usuario: usuario,
-        p_senha: senha
-    });
-
-async function recarregarSchema() {
-    try {
-        await supabaseClient.realtime.disconnect();
-        await supabaseClient.realtime.connect();
-        console.log('Schema recarregado com sucesso!');
-    } catch (error) {
-        console.error('Erro ao recarregar schema:', error);
-    }
-}
-
-// Chame esta função quando a página carregar
-document.addEventListener('DOMContentLoaded', async function () {
-    await recarregarSchema();
-
-    // Resto do seu código de inicialização...
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const loginForm = document.getElementById('login-form');
-    const loginContainer = document.getElementById('login-container');
-    const mainApp = document.getElementById('main-app-container');
-    const erroMsg = document.getElementById('login-erro');
-
-    loginForm.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const usuario = document.getElementById('login-usuario').value;
-        const senha = document.getElementById('login-senha').value;
-
-        console.log('Tentativa de login:', { usuario, senha });
-
-        try {
-            const { data, error } = await supabaseClient
-                .from('usuarios')
-                .select('*')
-                .eq('usuario', usuario)
-                .eq('senha', senha);
-
-            console.log('Resposta Supabase:', { data, error });
-            console.log('Status:', error ? error.message : 'Sucesso');
-
-            if (data && data.length > 0) {
-                const userData = data[0]; // Pega o primeiro usuário
-                formData.secretaria_orgao = userData.secretaria;
-                loginContainer.style.display = 'none';
-                mainApp.style.display = '';
-                console.log('Login bem-sucedido:', userData);
-
-            } else {
-                console.log('Nenhum usuário encontrado ou erro:', error);
-                erroMsg.classList.remove('hidden');
-            }
-        } catch (err) {
-            console.error('Erro na requisição:', err);
-            erroMsg.classList.remove('hidden');
-        }
-    });
-
-    loginForm.addEventListener('input', function () {
-        erroMsg.classList.add('hidden');
-    });
-});
 
 const secretariasInfo = {
     "Administração, Receita e Tributação": {
