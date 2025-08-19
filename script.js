@@ -20,24 +20,31 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         const usuario = document.getElementById('login-usuario').value;
         const senha = document.getElementById('login-senha').value;
-        console.log('Usuário:', usuario, 'Senha:', senha);
 
-        // Alteração: use supabaseClient nas consultas
-        const { data, error } = await supabaseClient
-            .from('usuarios')
-            .select('*')
-            .eq('usuario', usuario)
-            .eq('senha', senha) // Para produção, use hash de senha!
-            .single();
+        console.log('Tentativa de login:', { usuario, senha });
 
-        console.log('data:', data, 'error:', error);
+        try {
+            const { data, error } = await supabaseClient
+                .from('Usuarios')
+                .select('*')
+                .eq('usuario', usuario)
+                .eq('senha', senha)
+                .single();
 
-        if (data) {
-            // Salve a secretaria do usuário logado
-            formData.secretaria_orgao = data.secretaria;
-            loginContainer.style.display = 'none';
-            mainApp.style.display = '';
-        } else {
+            console.log('Resposta Supabase:', { data, error });
+            console.log('Status:', error ? error.message : 'Sucesso');
+
+            if (data) {
+                console.log('Usuário encontrado:', data);
+                formData.secretaria_orgao = data.secretaria;
+                loginContainer.style.display = 'none';
+                mainApp.style.display = '';
+            } else {
+                console.log('Nenhum usuário encontrado ou erro:', error);
+                erroMsg.classList.remove('hidden');
+            }
+        } catch (err) {
+            console.error('Erro na requisição:', err);
             erroMsg.classList.remove('hidden');
         }
     });
