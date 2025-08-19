@@ -1,8 +1,3 @@
-const SUPABASE_URL = 'https://rftldstjolqwhhzkwitz.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJmdGxkc3Rqb2xxd2hoemt3aXR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2MTc2NDYsImV4cCI6MjA3MTE5MzY0Nn0.Xs-v76P4Zbt8hsJq2LzsUsonf2P-UA82V82cz3HRz7k';
-
-const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
 let currentStep = 1;
 const totalSteps = 4;
 const formData = {
@@ -11,6 +6,11 @@ const formData = {
 };
 
 document.addEventListener('DOMContentLoaded', function () {
+    const SUPABASE_URL = 'https://rftldstjolqwhhzkwitz.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJmdGxkc3Rqb2xxd2hoemt3aXR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2MTc2NDYsImV4cCI6MjA3MTE5MzY0Nn0.Xs-v76P4Zbt8hsJq2LzsUsonf2P-UA82V82cz3HRz7k';
+
+    const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     const loginForm = document.getElementById('login-form');
     // ... o resto do seu código de login
     loginForm.addEventListener('submit', async (e) => {
