@@ -16,7 +16,22 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 // Alteração: use outro nome para o cliente Supabase para evitar conflito
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+async function recarregarSchema() {
+    try {
+        await supabaseClient.realtime.disconnect();
+        await supabaseClient.realtime.connect();
+        console.log('Schema recarregado com sucesso!');
+    } catch (error) {
+        console.error('Erro ao recarregar schema:', error);
+    }
+}
 
+// Chame esta função quando a página carregar
+document.addEventListener('DOMContentLoaded', async function () {
+    await recarregarSchema();
+
+    // Resto do seu código de inicialização...
+});
 
 document.addEventListener('DOMContentLoaded', function () {
     const loginForm = document.getElementById('login-form');
