@@ -1,3 +1,9 @@
+// Verifique se supabase está carregado
+if (typeof supabase === 'undefined') {
+    console.error('Supabase não carregado!');
+    // Recarregue a página ou mostre mensagem de erro
+}
+
 let currentStep = 1;
 const totalSteps = 4;
 const formData = {
@@ -9,6 +15,8 @@ const SUPABASE_URL = 'https://tkttoczozozdpxtgqqgf.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRrdHRvY3pvem96ZHB4dGdxcWdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyNzg2NzYsImV4cCI6MjA3MDg1NDY3Nn0.8F4b0yuynIatHp32F-LeMNT539yHehcV-h_zZ8iaWGw';
 // Alteração: use outro nome para o cliente Supabase para evitar conflito
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const loginForm = document.getElementById('login-form');
