@@ -10,6 +10,38 @@ const formData = {
     aditivos: []
 };
 
+document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.getElementById('login-form');
+    // ... o resto do seu código de login
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const usuario = document.getElementById('login-usuario').value;
+        const senha = document.getElementById('login-senha').value;
+        const erroMsg = document.getElementById('login-erro');
+
+        // Consulta o banco de dados Supabase
+        const { data, error } = await supabase
+            .from('login')
+            .select('usuario, senha')
+            .eq('usuario', usuario)
+            .eq('senha', senha);
+
+        if (error || !data || data.length === 0) {
+            // Login falhou
+            erroMsg.classList.remove('hidden');
+        } else {
+            // Login bem-sucedido
+            loginContainer.style.display = 'none';
+            mainApp.style.display = '';
+            erroMsg.classList.add('hidden');
+
+            // Opcional: Aqui você pode buscar a secretaria do usuário logado se estiver em outra tabela
+            // ou se você adicionar uma coluna 'secretaria' na tabela 'login'.
+        }
+    });
+});
+
 const secretariasInfo = {
     "Administração, Receita e Tributação": {
         nome: "Hailson Alves Ramalho",
