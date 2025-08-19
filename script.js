@@ -5,42 +5,6 @@ const formData = {
     aditivos: []
 };
 
-document.addEventListener('DOMContentLoaded', function () {
-    const SUPABASE_URL = 'https://rftldstjolqwhhzkwitz.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJmdGxkc3Rqb2xxd2hoemt3aXR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2MTc2NDYsImV4cCI6MjA3MTE5MzY0Nn0.Xs-v76P4Zbt8hsJq2LzsUsonf2P-UA82V82cz3HRz7k';
-    const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    const loginForm = document.getElementById('login-form');
-    // ... o resto do seu código de login
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const usuario = document.getElementById('login-usuario').value;
-        const senha = document.getElementById('login-senha').value;
-        const erroMsg = document.getElementById('login-erro');
-
-        // Consulta o banco de dados Supabase
-        const { data, error } = await supabase
-            .from('login')
-            .select('usuario, senha')
-            .eq('usuario', usuario)
-            .eq('senha', senha);
-
-        if (error || !data || data.length === 0) {
-            // Login falhou
-            erroMsg.classList.remove('hidden');
-        } else {
-            // Login bem-sucedido
-            loginContainer.style.display = 'none';
-            mainApp.style.display = '';
-            erroMsg.classList.add('hidden');
-
-            // Opcional: Aqui você pode buscar a secretaria do usuário logado se estiver em outra tabela
-            // ou se você adicionar uma coluna 'secretaria' na tabela 'login'.
-        }
-    });
-});
-
 const secretariasInfo = {
     "Administração, Receita e Tributação": {
         nome: "Hailson Alves Ramalho",

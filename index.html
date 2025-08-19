@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de Despacho para Aditivo Contratual</title>
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: 'Inter', arial, sans-serif;
@@ -609,10 +609,31 @@
             </div>
         </main>
     </div>
+    <script src="script.js"></script>
+    <script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const loginForm = document.getElementById('login-form');
+            const loginContainer = document.getElementById('login-container');
+            const mainApp = document.getElementById('main-app-container');
+            const erroMsg = document.getElementById('login-erro');
+            loginForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const usuario = document.getElementById('login-usuario').value;
+                const senha = document.getElementById('login-senha').value;
+                if (usuario === 'Despacho123' && senha === 'Prefeitura1234') {
+                    loginContainer.style.display = 'none';
+                    mainApp.style.display = '';
+                } else {
+                    erroMsg.classList.remove('hidden');
+                }
+            });
+
+            loginForm.addEventListener('input', function () {
+                erroMsg.classList.add('hidden');
+            });
+        });
+    </script>
 </body>
 
 </html>
