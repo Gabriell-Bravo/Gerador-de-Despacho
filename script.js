@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             const { data, error } = await supabaseClient
-                .from('Usuarios')
+                .from("Usuarios")
                 .select('*')
                 .eq('usuario', usuario)
                 .eq('senha', senha);
