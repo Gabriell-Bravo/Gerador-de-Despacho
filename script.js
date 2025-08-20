@@ -263,7 +263,7 @@ function formatCurrency(value) {
 
 function addApostilamento() {
     const id = Date.now();
-    const newRow = { id: id, data: '', indice: '', valor: '' };
+    const newRow = { id: id, data: '', indice: '', percentual: '', valor: '' };
     formData.apostilamentos.push(newRow);
     renderApostilamentos();
 }
@@ -284,7 +284,8 @@ function renderApostilamentos() {
                 <tr id="apostilamento-${item.id}">
                     <td class="p-1"><input type="date" value="${item.data}" onchange="updateApostilamento(${item.id}, 'data', this.value)" class="w-full p-2 text-sm border-slate-300 rounded-md"></td>
                     <td class="p-1"><input type="text" value="${item.indice}" onchange="updateApostilamento(${item.id}, 'indice', this.value)" class="w-full p-2 text-sm border-slate-300 rounded-md"></td>
-                    <td class="p-1"><input type="number" value="${item.valor}" onchange="updateApostilamento(${item.id}, 'valor', this.value)" class="w-full p-2 text-sm border-slate-300 rounded-md"></td>
+                    <td class="p-1"><input type="number" step="0.01" value="${item.percentual}" onchange="updateApostilamento(${item.id}, 'percentual', this.value)" class="w-full p-2 text-sm border-slate-300 rounded-md"></td>
+                    <td class="p-1"><input type="number" step="0.01" value="${item.valor}" onchange="updateApostilamento(${item.id}, 'valor', this.value)" class="w-full p-2 text-sm border-slate-300 rounded-md"></td>
                     <td class="p-1"><button onclick="removeApostilamento(${item.id})" class="text-red-500 hover:text-red-700 font-bold p-2">X</button></td>
                 </tr>
             `).join('');
@@ -449,22 +450,24 @@ function generatePreview() {
     const apostilamentosTable = formData.apostilamentos.length > 0 ? `
         <table style="width:100%;border-collapse:collapse;margin-bottom:16px;">
             <thead>
+            <tr>
+                <th style="border:1px solid #ccc;padding:4px;">Nº</th>
+                <th style="border:1px solid #ccc;padding:4px;">Data do Documento</th>
+                <th style="border:1px solid #ccc;padding:4px;">Índice Aplicado</th>
+                <th style="border:1px solid #ccc;padding:4px;">Percentual Aplicado</th>
+                <th style="border:1px solid #ccc;padding:4px;">Valor Reajustado</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${formData.apostilamentos.map((a, i) => `
                 <tr>
-                    <th style="border:1px solid #ccc;padding:4px;">Nº</th>
-                    <th style="border:1px solid #ccc;padding:4px;">Data do Documento</th>
-                    <th style="border:1px solid #ccc;padding:4px;">Índice Aplicado</th>
-                    <th style="border:1px solid #ccc;padding:4px;">Valor Reajustado</th>
+                    <td style="border:1px solid #ccc;padding:4px;">${i + 1}</td>
+                    <td style="border:1px solid #ccc;padding:4px;">${formatDate(a.data)}</td>
+                    <td style="border:1px solid #ccc;padding:4px;">${a.indice || 'N/D'}</td>
+                    <td style="border:1px solid #ccc;padding:4px;">${a.percentual}%</td>
+                    <td style="border:1px solid #ccc;padding:4px;">${formatCurrency(a.valor)}</td>
                 </tr>
-            </thead>
-            <tbody>
-                ${formData.apostilamentos.map((a, i) => `
-                    <tr>
-                        <td style="border:1px solid #ccc;padding:4px;">${i + 1}</td>
-                        <td style="border:1px solid #ccc;padding:4px;">${formatDate(a.data)}</td>
-                        <td style="border:1px solid #ccc;padding:4px;">${a.indice || 'N/D'}</td>
-                        <td style="border:1px solid #ccc;padding:4px;">${formatCurrency(a.valor)}</td>
-                    </tr>
-                `).join('')}
+            `).join('')}
             </tbody>
         </table>
     ` : '<em>Nenhum apostilamento registrado.</em>';
