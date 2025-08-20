@@ -316,7 +316,8 @@ function renderAditivos() {
                         <select onchange="updateAditivo(${item.id}, 'tipo', this.value)" class="w-full p-2 text-sm border-slate-300 rounded-md">
                             <option value="Prorrogação de Vigência" ${item.tipo === 'Prorrogação de Vigência' ? 'selected' : ''}>Prorrogação</option>
                             <option value="Renovação Contratual" ${item.tipo === 'Renovação Contratual' ? 'selected' : ''}>Renovação</option>
-                        </select>
+                            <option value="Alteraçao contratual" ${item.tipo === 'Renovação Contratual' ? 'selected' : ''}>Renovação Contratual</option>
+                            </select>
                     </td>
                     <td class="p-1"><input type="date" value="${item.inicio}" onchange="updateAditivo(${item.id}, 'inicio', this.value)" class="w-full p-2 text-sm border-slate-300 rounded-md"></td>
                     <td class="p-1"><input type="date" value="${item.fim}" onchange="updateAditivo(${item.id}, 'fim', this.value)" class="w-full p-2 text-sm border-slate-300 rounded-md"></td>
